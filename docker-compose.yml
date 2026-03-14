@@ -1,0 +1,27 @@
+# Docker Compose configuration for local development.
+#
+# Usage:
+#   docker compose up        — start the app
+#   docker compose up --build — rebuild after Gemfile or Dockerfile changes
+#   docker compose down      — stop and remove containers
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    volumes:
+      - storage:/rails/storage
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/up"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+volumes:
+  storage:
