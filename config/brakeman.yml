@@ -2,4 +2,4 @@
 # Skip the EOLRuby check because upgrading Ruby is currently out of scope.
 # TODO: Remove this once Ruby is upgraded to a supported version.
 :skip_checks:
-  - EOLRuby
+  - CheckEOLRuby
